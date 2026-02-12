@@ -9,3 +9,5 @@ defer - download and run after html parsing is completed
 React element is nothing but JS objects
 
 render understands the ele, which is an JS object and constructs html element from it
+
+With React.createElement , its hard to handle nested element
