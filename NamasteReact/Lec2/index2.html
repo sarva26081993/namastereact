@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="root">
+    </div>
+
+    <div id="root2">
+    </div>
+
+
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script> //react is the core library
+    which has the createElement API to create the UI
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script> //react-dom is the
+    library which has the createRoot API to create the root for rendering the UI
+
+    <script>
+
+        const ele = React.createElement("h1", {}, "Welcome to react");  //describes the UI , hence in Core React, we have createElement API to create the UI
+        const root = ReactDOM.createRoot(document.getElementById("root")); //describes the rendering strategy,hence in ReactDOM, we have createRoot API to create the root for rendering the UI
+        root.render(ele); //renders the UI on the screen
+
+        const ele2 = React.createElement("p", {}, "Welcome to react");
+        const root2 = ReactDOM.createRoot(document.getElementById("root2")).render(ele2);
+
+    </script>
+
+</body>
+
+</html>
