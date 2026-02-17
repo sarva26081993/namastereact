@@ -58,3 +58,7 @@ to support/provide compatible browsers , provide browserslist in package.json
 cacheing works on /dist folder once the build is completed
 
 "browserslist" : ["> 5% in IN" , "> 5% in US" , "last 2 chrome version"]
+
+https://chatgpt.com/c/69948376-76d8-8323-8068-94b79efcc49e
+https://chatgpt.com/c/6994a775-9360-8322-b5f3-c0ba80e037fe
+https://chatgpt.com/c/6994a59d-b224-8321-b9e2-6230d9acde5b
