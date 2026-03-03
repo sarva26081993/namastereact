@@ -22,7 +22,7 @@ const ResCard = ({ resData }) => {
       />
       <h3>{name}</h3>
       <p>{cuisines.join(", ")}</p>
-      <p>⭐ {avgRating}</p>
+      <p>{avgRating} ⭐</p>
       <p>{costForTwo}</p>
       <p>{sla?.slaString}</p>
     </div>
