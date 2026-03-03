@@ -1,0 +1,29 @@
+{
+  "name": "lec2",
+  "version": "1.0.0",
+  "description": "Namaste React",
+  "keywords": [
+    "react"
+  ],
+  "license": "ISC",
+  "author": "Sarvajeet",
+  "type": "commonjs",
+  "scripts": {
+    "start": "parcel index3.html",
+    "build": "parcel build index3.html",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "parcel": "^2.16.4"
+  },
+  "dependencies": {
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4"
+  },
+  "browserslist": [
+    "last 1 Chrome version",
+    "last 1 Safari version",
+    "last 1 Firefox version",
+    "last 1 Edge version"
+  ]
+}
