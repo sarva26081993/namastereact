@@ -270,3 +270,165 @@ It’s triggered by an event
 
 all above are same
 ````
+
+# Lec 4
+
+CSS can be added inside React Component itself (inline)
+
+const RestaurantCard = () => {
+return(
+
+<div className="res-card" style={{backgroundColor: '#f0f0f0'}}>
+<h1>27 Yard Restaurant
+</div>
+)
+}
+
+{} --> outer js object
+{} --> inner css property
+
+Try to treat various elements on webpage as React Components
+
+Example of Restaurant Card Component :
+const ResCard = () => {
+return (
+
+<div className="res-card">
+<h3 style={{ textAlign: "center" }}>KFC</h3>
+<img
+src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/RX_THUMBNAIL/IMAGES/VENDOR/2026/1/8/601f04f0-df31-4c44-ad71-b7a98f4ae8c4_369088.JPG"
+width={"200px"}
+height={"200px"} ></img>
+<h4>Chicken , Burgers ,Wraps</h4>
+<h4>4.5 Stars</h4>
+<h4>20 Minutes</h4>
+</div>
+);
+};
+
+---
+
+Props in React
+Passing a prop to a component is just like passing argument to the function
+
+const ResCard = (props) => {
+return (
+
+<div className="res-card">
+<h3 style={{ textAlign: "center" }}>{props.resName}</h3>
+<img
+src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/RX_THUMBNAIL/IMAGES/VENDOR/2026/1/8/601f04f0-df31-4c44-ad71-b7a98f4ae8c4_369088.JPG"
+width={"200px"}
+height={"200px"} ></img>
+<h4>{props.cuisine}</h4>
+<h4>4.5 Stars</h4>
+<h4>20 Minutes</h4>
+</div>
+);
+};
+
+const CardContainer = () => {
+return (
+
+<div className="card-container">
+<ResCard resName="KFC" cuisine="Burger" />
+<ResCard resName="Burger King" cuisine="Wraps and Burgers" />
+</div>
+);
+};
+
+so in CardContainer , whatever properties being passed inside ResCard like resName and cuisine , all this properties will be received inside props object
+
+Props can be destructured on the fly as well :
+
+const ResCard = ({resName , cuisine}) => {
+return (
+
+<div className="res-card">
+<h3 style={{ textAlign: "center" }}>{resName}</h3>
+<img
+src="https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/RX_THUMBNAIL/IMAGES/VENDOR/2026/1/8/601f04f0-df31-4c44-ad71-b7a98f4ae8c4_369088.JPG"
+width={"200px"}
+height={"200px"} ></img>
+<h4>{cuisine}</h4>
+<h4>4.5 Stars</h4>
+<h4>20 Minutes</h4>
+</div>
+);
+};
+
+even this will work
+
+---
+
+Config Driven UI
+The UI is generated based on a configuration (JSON/object) instead of hardcoded components.
+example :
+
+On Swiggy Website , data of restaurants , offers etc may vary as per the different locations, So UI varies. Components and content of UI varies as per location's data coming from backend. This is known as Config Driven UI
+
+Array.join('-') --> separates values in Array with - acting as separator
+
+Claudinary is another CDN
+
+Components should be reusablle and dynamic
+
+Each child in the list should have a unique key property
+--- whenever looping over any list, a unique must be provided to identify each child uniquely
+--- this is to keep track of any new child being introduced. if react doesn't identify each child uniquely, it will keep on rendering all the children, hence leading to inefficient rendering approach
+
+--- when react keeps track of all the children present in the list , it becomes efficient in rendering approach , only changed, added or removed child will be rendered and not all children
+
+KEYS ARE VERY VERY IMPORTANT FOR EFFICIENT RENDERING
+
+indexes should not be used as keys as sequence of children may change
+
+unique key >>>>>>>>>>> index as a key
+
+import React from "react";
+import ReactDOM from "react-dom/client";
+import restaurant from "./restaurant.json";
+
+// ✅ Extract restaurants safely
+const restaurants =
+restaurant?.data?.data?.data?.cards?.find(
+(card) => card?.card?.card?.gridElements?.infoWithStyle?.restaurants,
+)?.card?.card?.gridElements?.infoWithStyle?.restaurants || [];
+
+// ✅ Restaurant Card Component
+const ResCard = ({ resData }) => {
+const { name, cuisines, avgRating, costForTwo, sla, cloudinaryImageId } =
+resData;
+
+return (
+
+<div className="res-card">
+<img
+className="res-img"
+src={`https://media-assets.swiggy.com/swiggy/image/upload/${cloudinaryImageId}`}
+alt={name}
+/>
+<h3>{name}</h3>
+<p>{cuisines.join(", ")}</p>
+<p>⭐ {avgRating}</p>
+<p>{costForTwo}</p>
+<p>{sla?.slaString}</p>
+</div>
+);
+};
+
+// ✅ Main App Component
+const App = () => {
+return (
+
+<div className="card-container">
+{restaurants.map((res) => (
+<ResCard key={res.info.id} resData={res.info} />
+))}
+</div>
+);
+};
+
+// ✅ Render
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<App />);
